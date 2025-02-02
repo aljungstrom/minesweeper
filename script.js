@@ -35,11 +35,21 @@ function init() {
     }
 
     // Placera slumpmässigt ut minor
-    place_mines();
+    placeMines();
     
     // Uppdatera count-fältet för varje position på spelplanen (board).
-    update_counts();
+    updateCounts();
     
+}
+
+/*
+Uppgift 1: skriv en funktion som lägger till rätt antal minor på
+planen (board).  Detta ska ske slumpmässigt. 
+
+Tips: använd Math.random()
+*/
+function placeMines(){
+    //complete me
 }
 
 /*
@@ -53,73 +63,8 @@ Exempel: Om
 
 så ska board[0][0] ha count 2.
 */
-function update_counts(){
-    for (let i = 0; i < numRows; i++) {
-        for (
-            let j = 0;
-            j < numCols;
-            j++
-        ) {
-            if (!board[i][j].isMine) {
-                let count = 0;
-                for (
-                    let dx = -1;
-                    dx <= 1;
-                    dx++
-                ) {
-                    for (
-                        let dy = -1;
-                        dy <= 1;
-                        dy++
-                    ) {
-                        const ni =
-                            i + dx;
-                        const nj =
-                            j + dy;
-                        if (
-                            ni >= 0 &&
-                            ni <
-                                numRows &&
-                            nj >= 0 &&
-                            nj <
-                                numCols &&
-                            board[ni][
-                                nj
-                            ].isMine
-                        ) {
-                            count++;
-                        }
-                    }
-                }
-                board[i][j].count =
-                    count;
-            }
-        }
-    }
-}
-
-/*
-Uppgift 1: skriv en funktion som lägger till rätt antal minor på
-planen (board).  Detta ska ske slumpmässigt. 
-
-Tips: använd Math.random()
-*/
-function place_mines(){
-    let minesPlaced = 0;
-    while (minesPlaced < numMines) {
-        const row = Math.floor(
-            Math.random() * numRows
-        );
-        const col = Math.floor(
-            Math.random() * numCols
-        );
-        if (!board[row][col].isMine) {
-            board[row][
-                col
-            ].isMine = true;
-            minesPlaced++;
-        }
-    }
+function updateCounts(){
+    //complete me
 }
 
 /*
@@ -127,7 +72,7 @@ Uppgift 3: Skriv en funktion som tar två heltal (i,j) och avslöjar
 huruvida board[i][j] är en bomb eller inte. Här kommer instruktioner:
 
 1. Om positionen redan är avsöljad (revealed-fältet är true) eller
-(i,j) inte är en giltig position så ska ingenting göras. Om detta inte
+(i,j) inte är en giltig position så ska ingenting mer göras. Om detta inte
 är fallet ska revealed sättas till true och vi går vidare till steg 2.
 
 2. Om vi steg på en mina är spelet över och ett nedlåtande meddelande
@@ -136,47 +81,12 @@ ska skrivas ut till användaren.
 3. Om vi steg på en position som inte
 har några minor som grannar ska vi även avslöja alla grannar. Tips:
 rekursion.
+
+4. När detta är klart kallar vi på renderBoard() för att uppdatera
+spelplanen för användaren.
 */
-function revealCell(row, col) {
-    if (
-        row < 0 ||
-        row >= numRows ||
-        col < 0 ||
-        col >= numCols ||
-        board[row][col].revealed
-    ) {
-        return;
-    }
-
-    board[row][col].revealed = true;
-
-    if (board[row][col].isMine) {
-        // Handle game over
-        alert(
-            "Game Over! You stepped on a mine."
-        );
-    } else if (
-        board[row][col].count === 0
-    ) {
-        // If cell has no mines nearby,
-        // Reveal adjacent cells
-        for (
-            let dx = -1;
-            dx <= 1;
-            dx++
-        ) {
-            for (
-                let dy = -1;
-                dy <= 1;
-                dy++
-            ) {
-                revealCell(
-                    row + dx,
-                    col + dy
-                );
-            }
-        }
-    }
+function revealCell(i,j) {
+    // Complete me
     renderBoard();
 }
 

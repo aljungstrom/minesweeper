@@ -86,7 +86,7 @@ rekursion.
 spelplanen för användaren.
 */
 function revealCell(i,j) {
-    // Complete me
+    // complete me
     renderBoard();
 }
 
